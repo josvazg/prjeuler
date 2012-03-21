@@ -39,8 +39,11 @@ func maxFactor(target long) long {
 func main() {
     t:=time.Now()
 	fmt.Println("maxFactor(500)=",maxFactor(500),"in",(time.Since(t)))
+    t=time.Now()
     fmt.Println("maxFactor(600851475143)=",maxFactor(600851475143),"in",(time.Since(t)))
+    t=time.Now()
     fmt.Println("maxFactor(600851475140)=",maxFactor(600851475140),"in",(time.Since(t)))
+    t=time.Now()
     fmt.Println("maxFactor(60085147514)=",maxFactor(60085147514),"in",(time.Since(t)))
 }
 
