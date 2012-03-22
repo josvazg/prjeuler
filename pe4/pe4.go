@@ -6,8 +6,10 @@ import (
 	"time"
 )
 
-func isPalindrome(n int) bool {
-	inv := 0
+type long uint64
+
+func isPalindrome(n long) bool {
+	inv := long(0)
 	for rest := n; rest > 1; rest = rest / 10 {
 		inv = inv*10 + (rest % 10)
 	}
@@ -15,18 +17,16 @@ func isPalindrome(n int) bool {
 	return n == inv
 }
 
-func maxPalindrome1(digits int) int {
-	top := int(math.Pow10(digits) - 1)
-	min := int(math.Pow10(digits - 1))
-	largestPalindrome := 0
-	a := min
+func maxPalindrome1(digits int) long {
+	top := long(math.Pow10(digits) - 1)
+	min := long(math.Pow10(digits - 1))
+	largestPalindrome := long(0)
 	//n := 0
-	for ; a <= top; a++ {
+	for a := min; a <= top; a++ {
 		//n++
-		b := min
-		for ; b <= top; b++ {
-			//n++
-			c := a * b
+		for b := a; b <= top; b++ {
+			//n++			
+			c := long(a * b)
 			if c > largestPalindrome && isPalindrome(c) {
 				largestPalindrome = c
 			}
@@ -36,18 +36,17 @@ func maxPalindrome1(digits int) int {
 	return largestPalindrome
 }
 
-func maxPalindrome2(digits int) int {
-	top := int(math.Pow10(digits) - 1)
-	min := int(math.Pow10(digits - 1))
-	largestPalindrome := 0
+func maxPalindrome2(digits int) long {
+	top := long(math.Pow10(digits) - 1)
+	min := long(math.Pow10(digits - 1))
+	largestPalindrome := long(0)
 	//n := 0
 	for a := top; a >= min; a-- {
 		//n++
-		b := top
-		for ; b >= min; b-- {
+		for b := top; b >= a; b-- {
 			//n++
 			c := a * b
-			if c < largestPalindrome {
+			if c <= largestPalindrome {
 				break
 			}
 			if isPalindrome(c) {
@@ -59,16 +58,16 @@ func maxPalindrome2(digits int) int {
 	return largestPalindrome
 }
 
-func maxPalindrome3(digits int) int {
-	top := int(math.Pow10(digits) - 1)
-	min := int(math.Pow10(digits - 1))
-	largestPalindrome := 0
+func maxPalindrome3(digits int) long {
+	top := long(math.Pow10(digits) - 1)
+	min := long(math.Pow10(digits - 1))
+	largestPalindrome := long(0)
 	pow11 := top - top%11 //The largest number less than or equal top and divisible by 11
 	//n := 0
 	for a := top; a >= min; a-- {
 		//n++
 		b := pow11
-		db := 11
+		db := long(11)
 		if a%11 == 0 {
 			b = top
 			db = 1
