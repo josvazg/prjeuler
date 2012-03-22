@@ -44,7 +44,7 @@ func isPrime(primes []int, a int) bool {
 }
 
 func nextPrime(primes []int) (int, []int) {
-	for i := primes[len(primes)-1]; ; i++ {
+	for i := primes[len(primes)-1]+1; ; i++ {
 		if isPrime(primes, i) {
 			primes = append(primes, i)
 			//fmt.Println("primes=", primes)
@@ -55,22 +55,26 @@ func nextPrime(primes []int) (int, []int) {
 }
 
 func minDivPE(n int) long {
-	primes := []int{1, 2}
+	primes := []int{1}
 	m := long(1)
 	check := true
 	limit := int(math.Sqrt(float64(n)))
-	for p := 2; p <= n; {
+	for p := 1;; {
 		p, primes = nextPrime(primes)
+		if p>n {
+			break
+		}
 		a := 1
 		if check {
 			if p <= limit {
-				a = int(math.Floor(math.Log(float64(n))) / math.Log(float64(p)))
+				a = int(math.Floor(math.Log(float64(n)) / math.Log(float64(p))))
+				//fmt.Println("log(", n, ")/log(", p,")=",a)
 			} else {
 				check = false
 			}
 		}
-		fmt.Println("p=", p, " check=", check)
 		m = m * long(math.Pow(float64(p), float64(a)))
+		//fmt.Println("p=", p, " check=", check," a=",a," limit=",limit," m=",m)
 	}
 	return m
 }
@@ -85,8 +89,7 @@ func main() {
 	fmt.Println("PE 1..10:", minDivPE(10), "in", (time.Since(t)))
 	t = time.Now()
 	fmt.Println("1..20:", minDiv(20), "in", (time.Since(t)))
-	/*t = time.Now()
-	fmt.Println("PE 1..20:", minDivPE(20), "in", (time.Since(t)))*/
-
+	t = time.Now()
+	fmt.Println("PE 1..20:", minDivPE(20), "in", (time.Since(t)))
 }
 
