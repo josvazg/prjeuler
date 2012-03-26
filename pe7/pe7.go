@@ -57,19 +57,18 @@ func isPrimePE(n int) bool {
 }
 
 func primeAtPE(n int) int {
-	limit:=10001
 	count:=1 //we  know that 2 is prime
 	candidate:=3
-	for ;count<limit;candidate=candidate+2 {
+	for count<n {
 		if isPrimePE(candidate) { 
 			count=count+1
 			//fmt.Println(candidate,"is primer number",count)
 		}
-		if count==limit {
-			return candidate
+		if count<n {
+			candidate=candidate+2
 		}
 	}
-	return -1
+	return candidate
 }
 
 func main() {
