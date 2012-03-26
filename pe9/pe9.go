@@ -30,5 +30,5 @@ func main() {
 	fmt.Println("Pythagorean Triplet a^2+b^2=c^2 product a*b*c that a+b+c=1000")
 
 	t := time.Now()
-	fmt.Println("BPythagorean Triplet Product:", PithagoreanTripletProduct(1000), "in", (time.Since(t)))
+	fmt.Println("Pythagorean Triplet Product:", PithagoreanTripletProduct(1000), "in", (time.Since(t)))
 }
